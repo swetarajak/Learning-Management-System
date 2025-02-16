@@ -24,5 +24,23 @@ class UserController{
             Response::json(["error" => $e->getMessage()],500);
         }
     }
+
+    public function login($data){
+        try{
+            $query = "SELECT * FROM users WHERE email = :email";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(":email", $data['email']);
+            $stmt->execute();
+
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($user && password_verify($data['password'], $user['password'])){
+                Response::json(["message" => "Login Successful", "user" => $user], 200);
+            }else{
+                Response::json(["message" => "Invalid Credentials"], 401);
+            }
+            } catch(PDOException $e){
+                Response::json(["error" => $e->getMessage()],500);
+         }
+    }
 }
 ?>
