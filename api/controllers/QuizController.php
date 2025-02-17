@@ -1,6 +1,6 @@
 <?php
-require_once '../config/database.php';
-require_once '../config/response.php';
+require_once dirname(__DIR__).'/config/database.php';
+require_once dirname(__DIR__).'/config/response.php';
 
 class QuizController{
     private $conn;
@@ -19,7 +19,7 @@ class QuizController{
             $stmt->execute();
             Response::json(["message" => "Quizz Created Successfully"], 201);
         } catch (PDOException $e){
-            Response::json(["message" => "Failed to create quiz"], 500);
+            Response::json(["error" => $e->getMessage()], 500);
         }
     }
     public function addQuestions($data){

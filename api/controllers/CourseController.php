@@ -1,6 +1,6 @@
 <?php
-require_once '../config/database.php';
-require_once '../config/response.php';
+require_once dirname(__DIR__).'/config/database.php';
+require_once dirname(__DIR__).'/config/response.php';
 
 class CourseController
 {
