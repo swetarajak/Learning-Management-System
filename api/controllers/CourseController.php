@@ -19,7 +19,7 @@ class CourseController
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            REsponse::json($courses, 200);
+            Response::json($courses, 200);
         } catch (PDOException $e) {
             Response::json(["message" => $e->getMessage()], 500);
         }
